@@ -1,0 +1,157 @@
+<div class="col-sm-2"></div>
+<div class="col-sm-8 container">
+  <nav class="navbar navbar-dark bg-primary">
+    <div class="fixed-left">
+      <h6>XYZ School</h6>
+    </div>
+    <div class="form-inline">
+      <span class="navbar-text" type="search" placeholder="Search" aria-label="Search">Welcome {{this.loggedInUser}}
+        !</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="this.logout()">Logout</button>
+    </div>
+  </nav>
+  <hr>
+</div>
+<div class="col-sm-3"></div>
+<div class="col-sm-6 container">
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-secondary" disabled>Onboarding Form</button>
+    <button type="button" class="btn btn-secondary" (click)="this.redirecTolist()">List Students</button>
+  </div>
+  <hr>
+  <div class="container">
+    <div class="col-sm-6 offset-sm-3 " *ngIf ="!id"><h1><small>Onboarding Form (Create)</small></h1></div>
+    <div class="col-sm-6 offset-sm-3" *ngIf ="!isEditEnabled"><h1><small>Onboarding Form (View)</small></h1></div>
+    <div class="col-sm-6 offset-sm-3" *ngIf ="id && isEditEnabled"><h1><small>Onboarding Form (Edit)</small></h1></div>
+  </div>
+  <div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="studentName">Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" minlength="3" pattern="[a-zA-Z]{3,}" required
+            formControlName="studentName" #studentName placeholder="Enter Name"
+            value="registerForm?.controls?.studentName?.value">
+          <div class="alert alert-danger"
+            *ngIf="registerForm?.controls?.studentName?.touched && registerForm?.controls?.studentName?.errors">Enter a
+            Valid Name.</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Category">Category</label>
+        <div class="col-sm-8">
+          <select formControlName="Category" #Category required class="form-control">
+            <option>Domestic</option>
+            <option>International</option>
+          </select>
+          <div class="alert alert-danger"
+            *ngIf="registerForm?.controls?.Category?.touched  && registerForm?.controls?.Category?.errors">Please Select
+            a Category.</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Documents</label>
+      </div>
+
+      <div class="container" *ngIf="!registerForm?.controls?.Category?.errors">
+
+        <label class="col-sm-8 col-form-label">Domicile *</label>
+        <input class="checkbox" type="checkbox" formControlName="Domicile">
+        <div class="alert alert-danger"
+          *ngIf="(registerForm?.controls?.Domicile?.touched  || registerForm?.controls?.fathersName?.touched) && !registerForm?.controls?.Domicile?.value === true">
+          Domicile is Mandatory.</div>
+
+
+        <label class="col-sm-8 col-form-label">Birth Certificate *</label><input class="checkbox" type="checkbox"
+          formControlName="BirthCertificate">
+        <div class="alert alert-danger"
+          *ngIf="(registerForm?.controls?.BirthCertificate?.touched  || registerForm?.controls?.fathersName?.touched) && !registerForm?.controls?.BirthCertificate?.value === true">
+          BirthCertificate is Mandatory.</div>
+        <label class="col-sm-8 col-form-label">Marksheets *</label><input class="checkbox" type="checkbox"
+          formControlName="Marksheets">
+        <div class="alert alert-danger"
+          *ngIf="(registerForm?.controls?.Marksheets?.touched  || registerForm?.controls?.fathersName?.touched) && !registerForm?.controls?.Marksheets?.value === true">
+          Marksheets
+          is Mandatory.</div>
+        <label class="col-sm-8 col-form-label">Declaration *</label><input class="checkbox" type="checkbox"
+          formControlName="Declaration">
+        <div class="alert alert-danger"
+          *ngIf="(registerForm?.controls?.Declaration?.touched  || registerForm?.controls?.fathersName?.touched) && !registerForm?.controls?.Declaration?.value === true">
+          Declaration is Mandatory.</div>
+        <div *ngIf="registerForm?.controls?.Category?.value=='Domestic'">
+          <label class="col-sm-8 col-form-label">Police Clearance </label><input class="checkbox" type="checkbox"
+            formControlName="PoliceClearance">
+          <label class="col-sm-8 col-form-label">Passport </label><input class="checkbox" type="checkbox"
+            formControlName="Passport">
+        </div>
+        <div *ngIf="registerForm?.controls?.Category?.value=='International'">
+          <label class="col-sm-8 col-form-label">Police Clearance *</label><input class="checkbox" type="checkbox"
+            formControlName="PoliceClearance">
+          <div class="alert alert-danger"
+            *ngIf="(registerForm?.controls?.PoliceClearance?.touched  || registerForm?.controls?.fathersName?.touched) && !registerForm?.controls?.PoliceClearance?.value === true">
+            PoliceClearance is Mandatory for International Students.</div>
+          <label class="col-sm-8 col-form-label">Passport *</label><input class="checkbox" type="checkbox"
+            formControlName="Passport">
+          <div class="alert alert-danger"
+            *ngIf="(registerForm?.controls?.Passport?.touched  || registerForm?.controls?.fathersName?.touched) && !registerForm?.controls?.Passport?.value === true">
+            Passport is
+            Mandatory for International Students.</div>
+        </div>
+      </div>
+      <div class="form-group row">
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="DOB">DOB</label>
+        <div class="col-sm-8">
+          <input type="date" class="form-control" max="2016-12-31" formControlName="DOB" #DOB
+            placeholder="Date Of Birth">
+          <div class="alert alert-danger"
+            *ngIf="registerForm?.controls?.DOB?.touched  && registerForm?.controls?.DOB?.errors">Enter a Valid Date Of
+            Birth.</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="fathersName">Father’s Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" minlength="3" pattern="[a-zA-Z]{3,}" formControlName="fathersName"
+            #fathersName placeholder="Father’s Name">
+          <div class="alert alert-danger"
+            *ngIf="registerForm?.controls?.fathersName?.touched  && registerForm?.controls?.fathersName?.errors">Enter a
+            Valid Fathers Name.</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="mothersName">Mother’s Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" minlength="3" pattern="[a-zA-Z]{3,}" formControlName="mothersName"
+            #mothersName placeholder="Mother’s Name">
+          <div class="alert alert-danger"
+            *ngIf="registerForm?.controls?.mothersName?.touched  && registerForm?.controls?.mothersName?.errors">Enter a
+            Valid Mother’s Name.</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="lastClassScore">Last Class score</label>
+        <div class="col-sm-8">
+          <input type="number" pattern="[0-9]{1,}" class="form-control" maxlength="3" max="100"
+            formControlName="lastClassScore" #lastClassScore placeholder="% (Marks)">
+          <div class="alert alert-danger"
+            *ngIf="registerForm.dirty && registerForm?.controls?.lastClassScore?.touched && registerForm?.controls?.lastClassScore?.errors ">
+            Enter a Valid %age less
+            than 100 and greater than 0.
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-8 container">
+          <button type="submit" class="btn btn-primary btn-block" *ngIf="isEditEnabled"
+            [disabled]="!registerForm?.valid">Add/Onboard
+            Student</button>
+        </div>
+        <div class="col-sm-2 container"></div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="col-sm-3"></div>

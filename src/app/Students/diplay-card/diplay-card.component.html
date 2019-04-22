@@ -1,0 +1,12 @@
+<div #target class="card w-750" style="width: -webkit-fill-available; background-color: coral">
+    <div class="card-body">
+      <h5 class="card-title">{{student.studentName}}</h5>
+      <p class="card-text">{{student.DOB}}, {{student.Category}}</p>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" [routerLink]="['/registerStudent',student.id]">View</button>
+        &nbsp;
+        <button type="button" class="btn btn-warning" [routerLink]="['/registerStudent',student.id+'e']">Edit</button>
+        &nbsp;
+        <button type="button" class="btn btn-danger" type="submit" (click)="this.deleteStudent()">Delete</button>
+      </div>
+</div>

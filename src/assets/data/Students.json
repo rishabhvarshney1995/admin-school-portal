@@ -1,0 +1,31 @@
+[{
+    "id" : 1,
+    "studentName" : "studenta",
+    "Category" : "Domestic",
+    "DOB" : "2016-12-15",
+    "fathersName" : "DAd",
+    "mothersName" : "MOM",
+    "lastClassScore" : 92,
+    "Domicile" : true,
+    "BirthCertificate" : true,
+    "Marksheets" : true,
+    "PoliceClearance" : true,
+    "Passport" : true,
+    "Declaration" : true
+},
+{
+    "id" : 2,
+    "studentName" : "studentb",
+    "Category" : "Domestic",
+    "DOB" : "2016-12-15",
+    "fathersName" : "Dad",
+    "mothersName" : "Mom",
+    "lastClassScore" : 90,
+    "Domicile" : true,
+    "BirthCertificate" : true,
+    "Marksheets" : true,
+    "PoliceClearance" : true,
+    "Passport" : true,
+    "Declaration" : true
+}
+]
