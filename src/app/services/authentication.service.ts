@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthenticationService {
 
-  private adminListPath = '/assets/data/AdminUsers.json';
+  private adminListPath = './assets/data/AdminUsers.json';
 
   constructor(private http : HttpClient) {}
   
